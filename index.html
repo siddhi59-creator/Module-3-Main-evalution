@@ -12,11 +12,25 @@ body{
 
 </style>
 <body>
-    <div> class = "login-container">
+    <div class = "login-container">
         <h2>Login</h2>
         <input type = "email" id="email" placeholder="Enter Email">
         <input type = "password" id="password" placeholder="Enter Password">
         <button onclick= "login()"> Login</button>
 
     </div>
+    <script>
+        function login(){
+            cosnt email = document.getElementById("email").value;
+             cosnt password = document.getElementById("password").value;
+             if (email==="admin@gmail.com" && password=== "admin1234"){
+                alert("Login success");
+                window.location.href = "admin.html";
+                
+             }else{
+                alert ("Wrong email or password");
+             }
+
+        }
+    </script>
 </body>
