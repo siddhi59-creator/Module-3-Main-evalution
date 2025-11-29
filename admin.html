@@ -122,10 +122,19 @@ function changeAvailability(index){
 function deleteVehicle(index){
     fleetData.splice(index,1);
     renderFleet();
+
+}
+function clearFilter(){
+    document.getElementById('filterCategory').value ='all';
+     document.getElementById('filterAvabilability').value ='all';
+     renderFleet();
+}(index){
+    fleetData.splice(index, 1);
+    renderFleet();
 }
 
 
-  </script>
 
+  </script>
 </body>
 </html>
