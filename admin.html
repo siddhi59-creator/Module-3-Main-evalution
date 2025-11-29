@@ -91,7 +91,7 @@
 
     function changeAvailability(btn) {
       const card = btn.parentElement;
-      const statusEl = card.querySelector('.sts');
+      const statusEl = card.quegrySelector('.sts');
       statusEl.innerText = statusEl.innerText === 'Available' ? 'Unavailable' : 'Available';
     }
 
@@ -99,6 +99,31 @@
       const card = btn.parentElement;
       card.remove();
     }
+    function renderFleet () { ... }
+    function addFleet () { ... }
+    function updateDriver(index){
+        const newDriver = prompt('Enter new driver name:');
+        if (newDriver && newDriver.trim() !==''){
+            fleetData[index].driver =newDriver;
+            renderFleet();
+
+        }
+    }
+
+function changeAvailability(index){
+    fleetData[index].available= 
+    fleetData[index].available=== 'Available'
+    ? 'Unavailable'
+    : 'Available':
+    renderFleet():
+}
+function deleteVehicle(index){
+    fleetData.splice(index,1);
+    renderFleet();
+}
+
+
   </script>
+
 </body>
 </html>
