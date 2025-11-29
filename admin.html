@@ -1,61 +1,104 @@
 <!DOCTYPE html>
-<title> Admin Dashboard</title>
-<style>
-    body{
-        margin: auto;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: medium;}
-        .navbar {
-        width: auto;
-        color: aliceblue;
-        padding: 20px;
-        background-color: azure;
-        position: fixed;}
-        .sidebar{
-        width: auto;
-        color: aliceblue;
-        padding: 20px;
-        background-color: azure;
-        position: fixed;
-        }
-        .main{flex-flow: column;
-            padding: 20px;
-            display: flex;
-            margin-top: auto;
-            margin-bottom: auto;
-
-
-        }  }
-</style>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; display: flex; height: 100vh; }
+    .navbar { width: 100%; background: #007bff; color: white; padding: 15px; position: fixed; top: 0; text-align: center; font-size: 20px; }
+    .sidebar { width: 280px; background: #f1f1f1; padding: 20px; margin-top: 60px; }
+    .main { flex-grow: 1; padding: 20px; margin-top: 60px; display: flex; flex-wrap: wrap; gap: 15px; }
+    label { font-weight: bold; display: block; margin-top: 10px; }
+    input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+    button { width: 100%; padding: 10px; margin-top: 15px; background: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .card { width: 30%; background: white; border: 1px solid #ccc; border-radius: 8px; padding: 15px; box-shadow: 0px 0px 8px rgba(0,0,0,0.1); }
+    .card h3 { margin: 0 0 10px; }
+    .status { font-weight: bold; }
+  </style>
+</head>
 <body>
-    <div class = "navbar">Admin Dashdoard</div>
-    <div class ="sidebar">
-        <h2>Add Fleet</h2>
-        <label> Registration No.</label>
-        <select id="category">
-            <option valuse ="">Select</option>
-            <option>Auto</option>
-            <option>Car</option>
-            <option>Truck</option>
-            <option>Bus</option>
-            <option>Scooty</option>
-        </select>
-        <label> Driver Name</label>
-        <input type = "text" id ="driver">
-        <label> Availability</label>
-        <select id ="Available">
-            <option value="Available">Available</option>
-             <option value="Unavailable">Unavailable</option>
-        </select>
-        <button onclick="addFleet()"> Add Fleet</button> 
-    </div>
-    <div class="main" id =fleetContainer"></div>
-    <script>
-        function addFleet(){
-            const regno= document.getElementById('regno').value.trim();
-            const Category= document.getElementById('Category').value.trim();
-            const driver= document.getElementById('driver').value.trim();
-            const Available= document.getElementById('Available').value.trim();
-        }
-    </script>
+  <div class="navbar">Admin Dashboard</div>
+
+  <div class="sidebar">
+    <h2>Add Fleet</h2>
+    <label>Registration No.</label>
+    <input type="text" id="regno">
+
+    <label>Category</label>
+    <select id="category">
+      <option value="">Select</option>
+      <option>Auto</option>
+      <option>Car</option>
+      <option>Truck</option>
+      <option>Bus</option>
+    </select>
+
+    <label>Driver Name</label>
+    <input type="text" id="driver">
+
+    <label>Availability</label>
+    <select id="available">
+      <option value="Available">Available</option>
+      <option value="Unavailable">Unavailable</option>
+    </select>
+
+    <button onclick="addFleet()">Add Fleet</button>
+  </div>
+
+  <div class="main" id="fleetContainer"></div>
+
+  <script>
+    function addFleet() {
+      const regno = document.getElementById('regno').value.trim();
+      const category = document.getElementById('category').value;
+      const driver = document.getElementById('driver').value.trim();
+      const available = document.getElementById('available').value;
+
+      if (!regno  !driver) {
+        alert("All fields are required!");
+        return;
+      }
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = 
+        <h3>${regno}</h3>
+        <p>Category: ${category}</p>
+        <p>Driver: <span class='drv'>${driver}</span></p>
+        <p class='status'>Status: <span class='sts'>${available}</span></p>
+        <button onclick="updateDriver(this)">Update Driver</button>
+        <button onclick="changeAvailability(this)">Change Availability</button>
+        <button onclick="deleteVehicle(this)">Delete Vehicle</button>
+      ;
+
+      document.getElementById('fleetContainer').appendChild(card);
+      alert("Fleet Added Successfully");
+
+      document.getElementById('regno').value = '';
+      document.getElementById('category').value = '';
+      document.getElementById('driver').value = '';
+      document.getElementById('available').value = 'Available';
+    }
+  function updateDriver(btn) {
+      const card = btn.parentElement;
+      const newDriver = prompt('Enter new driver name:');
+      if (newDriver && newDriver.trim() !== '') {
+        card.querySelector('.drv').innerText = newDriver;
+      }
+    }
+
+    function changeAvailability(btn) {
+      const card = btn.parentElement;
+      const statusEl = card.querySelector('.sts');
+      statusEl.innerText = statusEl.innerText === 'Available' ? 'Unavailable' : 'Available';
+    }
+
+    function deleteVehicle(btn) {
+      const card = btn.parentElement;
+      card.remove();
+    }
+  </script>
 </body>
+</html>
