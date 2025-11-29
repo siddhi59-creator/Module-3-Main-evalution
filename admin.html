@@ -43,7 +43,19 @@
         <label> Driver Name</label>
         <input type = "text" id ="driver">
         <label> Availability</label>
-        
-
+        <select id ="Available">
+            <option value="Available">Available</option>
+             <option value="Unavailable">Unavailable</option>
+        </select>
+        <button onclick="addFleet()"> Add Fleet</button> 
     </div>
+    <div class="main" id =fleetContainer"></div>
+    <script>
+        function addFleet(){
+            const regno= document.getElementById('regno').value.trim();
+            const Category= document.getElementById('Category').value.trim();
+            const driver= document.getElementById('driver').value.trim();
+            const Available= document.getElementById('Available').value.trim();
+        }
+    </script>
 </body>
